@@ -31,6 +31,10 @@ class Gameboard {
     // this.#shipCoordinates
   }
 
+  /**
+   * 
+   * @returns A 10x10 array filled with null values
+   */
   #createEmptyBoard() {
     let board = [];
     for (let i = 0; i < 10; i++) {
@@ -38,11 +42,22 @@ class Gameboard {
     }
     return board;
   }
-
+  /**
+   * 
+   * @returns Random x and y coordinates as a 2-length array
+   */
   #getRandomCoordinates() {
     return [Math.random() * 10, Math.random() * 10];
   }
 
+  /**
+   * 
+   * @param {Number} length - how many cells the ship would occupy
+   * @param {Number} direction - 0 is for horizontal, 1 is for vertical
+   * @param {Number} y 
+   * @param {Number} x 
+   * @returns 
+   */
   isValidPosition(length, direction, y, x) {
     let coordinateList = [];
 
@@ -71,6 +86,15 @@ class Gameboard {
     }
   }
 
+
+  /**
+   * placeShip creates a new ship object of the specified length and places
+   * a reference to that ship at all coordinates specified in the coordinateList
+   * parameter 
+   * @param {Number} length - Length of the ship
+   * @param {Array[]} coordinateList - An array of coordinates the ship would occupy in the board
+   * @returns the ship object that is created
+   */
   placeShip(length, coordinateList) {
     let ship = new Ship(length);
     for(let i = 0; i < coordinateList.length; i++){
@@ -79,7 +103,9 @@ class Gameboard {
     return ship;
   }
 
-  receiveAttack(x, y) {}
+  receiveAttack(y, x) {
+
+  }
 
   allShipsSunk() {}
 
