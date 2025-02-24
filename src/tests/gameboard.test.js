@@ -1,0 +1,122 @@
+import { Gameboard } from "../gameboard";
+
+test("GameBoard objects board is initialised properly", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.board).toEqual([
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+test("isValidPosition returns correct coordinate list for horizontal one-length", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(1, 0, 0, 0)).toEqual([[0, 0]]);
+});
+
+test("isValidPosition returns correct coordinate list for vertical one-length", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(1, 1, 0, 0)).toEqual([[0, 0]]);
+});
+
+test("isValidPosition returns correct coordinate list for horizontal two-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(2, 0, 0, 0)).toEqual([
+    [0, 0],
+    [0, 1],
+  ]);
+  expect(gameBoard.isValidPosition(2, 0, 0, 8)).toEqual([
+    [0, 8],
+    [0, 9],
+  ]);
+});
+
+test("isValidPosition returns null when out of bounds index would be accessed for horizontal two-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(2, 0, 0, 9)).toEqual(null);
+});
+
+test("isValidPosition returns correct coordinate list for vertical two-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(2, 1, 0, 0)).toEqual([
+    [0, 0],
+    [1, 0],
+  ]);
+});
+
+test("isValidPosition returns null when out of bounds index would be accessed for vertical two-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(2, 1, 9, 0)).toEqual(null);
+});
+
+test("isValidPosition returns correct coordinate list for horizontal three-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(3, 0, 0, 0)).toEqual([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+  ]);
+});
+
+test("isValidPosition returns null when out of bounds index would be accessed for horizontal three-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(3, 0, 0, 8)).toEqual(null);
+});
+
+test("isValidPosition returns correct coordinate list for vertical three-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(3, 1, 0, 0)).toEqual([
+    [0, 0],
+    [1, 0],
+    [2, 0],
+  ]);
+});
+
+test("isValidPosition returns correct coordinate list for horizontal four-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(4, 0, 0, 0)).toEqual([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+  ]);
+});
+
+test("isValidPosition returns correct coordinate list for vertical four-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(4, 1, 0, 0)).toEqual([
+    [0, 0],
+    [1, 0],
+    [2, 0],
+    [3, 0],
+  ]);
+});
+
+test("isValidPosition returns correct coordinate list for horizontal five-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(5, 0, 0, 0)).toEqual([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [0, 4],
+  ]);
+});
+
+test("isValidPosition returns correct coordinate list for vertical five-length ships", () => {
+  let gameBoard = new Gameboard();
+  expect(gameBoard.isValidPosition(5, 1, 0, 0)).toEqual([
+    [0, 0],
+    [1, 0],
+    [2, 0],
+    [3, 0],
+    [4, 0],
+  ]);
+});
