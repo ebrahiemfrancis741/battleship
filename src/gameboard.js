@@ -71,7 +71,13 @@ class Gameboard {
     }
   }
 
-  placeShip(direction, coordinateList) {}
+  placeShip(length, coordinateList) {
+    let ship = new Ship(length);
+    for(let i = 0; i < coordinateList.length; i++){
+      this.board[coordinateList[i][0]][coordinateList[i][1]] = ship;
+    }
+    return ship;
+  }
 
   receiveAttack(x, y) {}
 
@@ -101,10 +107,10 @@ class Gameboard {
                                can be successfully placed and returns an array of all the coordinates that ship uses 
                                in the game board 
                                
-    placeShip(D, C) - creates a new Ship object and places it on the board using the first element of the coordinate list 
+    placeShip(L, C) - creates a new Ship object and places it on the board using the first element of the coordinate list 
                       C (origin coordinate from which the ship starts increasing vertically/horizontally). If the length 
                       of the ship is more than 1, the other coordinates the ship takes up is filled with a REFERENCE to 
-                      this ship object, and ofcourse the direction D is used to know the direction of this.
+                      this ship object.
 
     We need an easy way to know which coordinates hold which ship therefore:
       Each coordinate in the list C will be used as a key that stores a reference to ship within those coordinates in the 

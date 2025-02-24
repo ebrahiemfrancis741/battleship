@@ -1,5 +1,7 @@
 import { Gameboard } from "../gameboard";
 
+// isValidPosition() ---------------------------------------------------------------------
+
 test("GameBoard objects board is initialised properly", () => {
   let gameBoard = new Gameboard();
   expect(gameBoard.board).toEqual([
@@ -118,5 +120,92 @@ test("isValidPosition returns correct coordinate list for vertical five-length s
     [2, 0],
     [3, 0],
     [4, 0],
+  ]);
+});
+
+//-----------------------------------------------------------------------------------------------
+
+test("Placeship correctly places a horizontal one-length ship", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 0));
+  expect(gameBoard.board).toEqual([
+    [ship, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+test("Placeship correctly places a vertical one-length ship", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 1, 0, 0));
+  expect(gameBoard.board).toEqual([
+    [ship, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+test("Placeship correctly places a horinztal two-length ship", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 0));
+  expect(gameBoard.board).toEqual([
+    [ship, ship, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+test("Placeship correctly places a vertical two-length ship", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 1, 0, 0));
+  expect(gameBoard.board).toEqual([
+    [ship, null, null, null, null, null, null, null, null, null],
+    [ship, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+test("Placeship correctly places a horizontal three-length ship", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(2, gameBoard.isValidPosition(3, 0, 2, 1));
+  expect(gameBoard.board).toEqual([
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, ship, ship, ship, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
   ]);
 });
