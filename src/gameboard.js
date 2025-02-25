@@ -2,7 +2,8 @@ import { Ship } from "./ship";
 
 class Gameboard {
   #board;
-  #shipCoordinates;
+  #coordinatesHit; // coordinates the enemy has chosen to hit
+  #ships; // the ships
 
   get board() {
     return this.#board;
@@ -12,12 +13,24 @@ class Gameboard {
     this.#board = board;
   }
 
-  get shipCoordinates() {
-    return this.#shipCoordinates;
+  get coordinatesHit() {
+    return this.#coordinatesHit;
   }
 
-  set shipCoordinates(shipCoordinates) {
-    this.#shipCoordinates = shipCoordinates;
+  set coordinatesHit(coordinatesHit) {
+    this.#coordinatesHit = coordinatesHit;
+  }
+
+  set shipCoordinates(coordinatesHit) {
+    this.#coordinatesHit = coordinatesHit;
+  }
+
+  get ships() {
+    return this.#ships;
+  }
+
+  set ships(ships) {
+    this.#ships = ships;
   }
   /*
     4 - 1 length
@@ -27,12 +40,13 @@ class Gameboard {
   */
 
   constructor() {
-    this.#board = this.#createEmptyBoard();
-    // this.#shipCoordinates
+    this.board = this.#createEmptyBoard();
+    this.coordinatesHit = [];
+    this.ships = [];
   }
 
   /**
-   * 
+   *
    * @returns A 10x10 array filled with null values
    */
   #createEmptyBoard() {
@@ -43,7 +57,7 @@ class Gameboard {
     return board;
   }
   /**
-   * 
+   *
    * @returns Random x and y coordinates as a 2-length array
    */
   #getRandomCoordinates() {
@@ -51,12 +65,12 @@ class Gameboard {
   }
 
   /**
-   * 
+   *
    * @param {Number} length - how many cells the ship would occupy
    * @param {Number} direction - 0 is for horizontal, 1 is for vertical
-   * @param {Number} y 
-   * @param {Number} x 
-   * @returns 
+   * @param {Number} y
+   * @param {Number} x
+   * @returns
    */
   isValidPosition(length, direction, y, x) {
     let coordinateList = [];
@@ -86,25 +100,33 @@ class Gameboard {
     }
   }
 
-
   /**
    * placeShip creates a new ship object of the specified length and places
    * a reference to that ship at all coordinates specified in the coordinateList
-   * parameter 
+   * parameter
    * @param {Number} length - Length of the ship
    * @param {Array[]} coordinateList - An array of coordinates the ship would occupy in the board
    * @returns the ship object that is created
    */
   placeShip(length, coordinateList) {
     let ship = new Ship(length);
-    for(let i = 0; i < coordinateList.length; i++){
+    this.ships.push(ship);
+    for (let i = 0; i < coordinateList.length; i++) {
       this.board[coordinateList[i][0]][coordinateList[i][1]] = ship;
     }
     return ship;
   }
 
   receiveAttack(y, x) {
-
+    let ship = this.board[y][x];
+    //check if those coordinates were already hit
+    for (let i = 0; i < this.#coordinatesHit.length; i++) {
+      if (this.#coordinatesHit[i][0] == y && this.#coordinatesHit[i][1] == x)
+        return;
+    }
+    // add coordinates to list of hits enemy has made
+    this.#coordinatesHit.push([y, x]);
+    if (ship) ship.hit();
   }
 
   allShipsSunk() {}

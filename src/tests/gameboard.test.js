@@ -124,6 +124,7 @@ test("isValidPosition returns correct coordinate list for vertical five-length s
 });
 
 //-----------------------------------------------------------------------------------------------
+// PlaceShip
 
 test("Placeship correctly places a horizontal one-length ship", () => {
   let gameBoard = new Gameboard();
@@ -207,5 +208,86 @@ test("Placeship correctly places a horizontal three-length ship", () => {
     [null, null, null, null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+//--------------------------------------------------------------------------------
+// receiveAttack
+
+test("receiveAttack() functions correctly for 1-length ships", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 0));
+  gameBoard.receiveAttack(0, 0);
+  expect(ship.numHits).toEqual(1);
+  expect(ship.isSunk()).toEqual(true);
+  expect(gameBoard.coordinatesHit).toEqual([[0, 0]]);
+});
+
+test("receiveAttack() functions correctly for 2-length ships", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 0));
+  gameBoard.receiveAttack(0, 0);
+  expect(ship.numHits).toEqual(1);
+  expect(ship.isSunk()).toEqual(false);
+  expect(gameBoard.coordinatesHit).toEqual([[0, 0]]);
+
+  gameBoard.receiveAttack(0, 1);
+  expect(ship.numHits).toEqual(2);
+  expect(ship.isSunk()).toEqual(true);
+  expect(gameBoard.coordinatesHit).toEqual([
+    [0, 0],
+    [0, 1],
+  ]);
+});
+
+test("receiveAttack() functions correctly for 3-length ships", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(3, gameBoard.isValidPosition(3, 0, 0, 0));
+  gameBoard.receiveAttack(0, 0);
+  expect(ship.numHits).toEqual(1);
+  expect(ship.isSunk()).toEqual(false);
+  expect(gameBoard.coordinatesHit).toEqual([[0, 0]]);
+
+  gameBoard.receiveAttack(0, 1);
+  expect(ship.numHits).toEqual(2);
+  expect(ship.isSunk()).toEqual(false);
+  expect(gameBoard.coordinatesHit).toEqual([
+    [0, 0],
+    [0, 1],
+  ]);
+
+  gameBoard.receiveAttack(0, 2);
+  expect(ship.numHits).toEqual(3);
+  expect(ship.isSunk()).toEqual(true);
+  expect(gameBoard.coordinatesHit).toEqual([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+  ]);
+});
+
+test("receiveAttack() functions correctly for 3-length ships on missed hits", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(3, gameBoard.isValidPosition(3, 0, 0, 0));
+  gameBoard.receiveAttack(5, 5);
+  expect(ship.numHits).toEqual(0);
+  expect(ship.isSunk()).toEqual(false);
+  expect(gameBoard.coordinatesHit).toEqual([[5, 5]]);
+
+  gameBoard.receiveAttack(2, 2);
+  expect(ship.numHits).toEqual(0);
+  expect(ship.isSunk()).toEqual(false);
+  expect(gameBoard.coordinatesHit).toEqual([
+    [5, 5],
+    [2, 2],
+  ]);
+
+  gameBoard.receiveAttack(3, 3);
+  expect(ship.numHits).toEqual(0);
+  expect(ship.isSunk()).toEqual(false);
+  expect(gameBoard.coordinatesHit).toEqual([
+    [5, 5],
+    [2, 2],
+    [3, 3],
   ]);
 });
