@@ -291,3 +291,37 @@ test("receiveAttack() functions correctly for 3-length ships on missed hits", ()
     [3, 3],
   ]);
 });
+//------------------------------------------------------------------------------
+//allShipsSunk
+
+test("allShipsSunk() returns true when all 1-length ships are sunk", () => {
+  let gameBoard = new Gameboard();
+  let ship1 = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 0));
+  let ship2 = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 1));
+  let ship3 = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 2));
+  gameBoard.receiveAttack(0,0);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,1);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,2);
+  expect(gameBoard.allShipsSunk()).toEqual(true);
+});
+
+test("allShipsSunk() returns true when all 1-length ships are sunk", () => {
+  let gameBoard = new Gameboard();
+  let ship1 = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 0));
+  let ship2 = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 2));
+  let ship3 = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 4));
+  gameBoard.receiveAttack(0,0);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,1);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,2);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,3);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,4);
+  expect(gameBoard.allShipsSunk()).toEqual(false);
+  gameBoard.receiveAttack(0,5);
+  expect(gameBoard.allShipsSunk()).toEqual(true);
+});

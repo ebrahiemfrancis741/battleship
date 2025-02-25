@@ -120,16 +120,21 @@ class Gameboard {
   receiveAttack(y, x) {
     let ship = this.board[y][x];
     //check if those coordinates were already hit
-    for (let i = 0; i < this.#coordinatesHit.length; i++) {
-      if (this.#coordinatesHit[i][0] == y && this.#coordinatesHit[i][1] == x)
+    for (let i = 0; i < this.coordinatesHit.length; i++) {
+      if (this.coordinatesHit[i][0] == y && this.coordinatesHit[i][1] == x)
         return;
     }
     // add coordinates to list of hits enemy has made
-    this.#coordinatesHit.push([y, x]);
+    this.coordinatesHit.push([y, x]);
     if (ship) ship.hit();
   }
 
-  allShipsSunk() {}
+  allShipsSunk() {
+    for (let i = 0; i < this.ships.length; i++) {
+      if (!this.ships[i].isSunk()) return false;
+    }
+    return true;
+  }
 
   /*
     we want to place a total of 10 ships on the gameboard currently we are 
