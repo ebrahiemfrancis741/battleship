@@ -43,6 +43,45 @@ class Gameboard {
     this.board = this.#createEmptyBoard();
     this.coordinatesHit = [];
     this.ships = [];
+    let coordinateList;
+
+    // add 4-length ships
+    coordinateList = this.getAvailableCoordinates(4);
+    this.board.placeShip(4, coordinateList);
+
+    // add 3-length ships
+    for (let i = 0; i < 2; i++) {
+      coordinateList = this.getAvailableCoordinates(3);
+      this.board.placeShip(3, coordinateList);
+    }
+
+    // add 2-length ships
+    for (let i = 0; i < 3; i++) {
+      coordinateList = this.getAvailableCoordinates(2);
+      this.board.placeShip(2, coordinateList);
+    }
+
+    // add 1-length ships
+    for (let i = 0; i < 4; i++) {
+      coordinateList = this.getAvailableCoordinates(1);
+      this.board.placeShip(1, coordinateList);
+    }
+  }
+
+  /**
+   *
+   * @param {Number} length - length of ship
+   */
+  getAvailableCoordinates(length) {
+    let direction;
+    let x, y;
+    let coordinateList;
+    do {
+      direction = Math.floor(Math.random() * 2);
+      [x, y] = this.#getRandomCoordinates();
+      coordinateList = this.isValidPosition(length, direction, y, x);
+    } while (!coordinateList);
+    return coordinateList;
   }
 
   /**
@@ -61,7 +100,7 @@ class Gameboard {
    * @returns Random x and y coordinates as a 2-length array
    */
   #getRandomCoordinates() {
-    return [Math.random() * 10, Math.random() * 10];
+    return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
   }
 
   /**
