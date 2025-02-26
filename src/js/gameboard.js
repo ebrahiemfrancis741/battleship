@@ -39,32 +39,35 @@ class Gameboard {
     1 - 4 length
   */
 
-  constructor() {
+  constructor(populate) {
     this.board = this.#createEmptyBoard();
     this.coordinatesHit = [];
     this.ships = [];
-    let coordinateList;
+    if (populate) this.placeAllShips();
+  }
 
+  placeAllShips() {
+    let coordinateList;
     // add 4-length ships
     coordinateList = this.getAvailableCoordinates(4);
-    this.board.placeShip(4, coordinateList);
+    this.placeShip(4, coordinateList);
 
     // add 3-length ships
     for (let i = 0; i < 2; i++) {
       coordinateList = this.getAvailableCoordinates(3);
-      this.board.placeShip(3, coordinateList);
+      this.placeShip(3, coordinateList);
     }
 
     // add 2-length ships
     for (let i = 0; i < 3; i++) {
       coordinateList = this.getAvailableCoordinates(2);
-      this.board.placeShip(2, coordinateList);
+      this.placeShip(2, coordinateList);
     }
 
     // add 1-length ships
     for (let i = 0; i < 4; i++) {
       coordinateList = this.getAvailableCoordinates(1);
-      this.board.placeShip(1, coordinateList);
+      this.placeShip(1, coordinateList);
     }
   }
 
