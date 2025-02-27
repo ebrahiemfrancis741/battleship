@@ -10,10 +10,10 @@ function getUiComponents() {
 function drawBoard(player, playerBoard) {
   let boardElement;
   if (player == 1) boardElement = getUiComponents().playerOneBoard;
-  else boardElement = getUiComponents().playerTwoBoard;
+  else if (player == 2) boardElement = getUiComponents().playerTwoBoard;
 
   let gridCellElement;
-  for (let i = 0; i < playerBoard.length; i++) {
+  for (let i = 0; i < playerBoard.board.length; i++) {
     gridCellElement = document.createElement("div");
     gridCellElement.classList.add("board-cell");
     boardElement.appendChild(gridCellElement);

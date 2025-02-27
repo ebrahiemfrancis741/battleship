@@ -1,4 +1,4 @@
-import { Gameboard } from "./gameboard";
+import { Gameboard } from "./gameboard.js";
 
 class Player {
   #board;
@@ -11,7 +11,9 @@ class Player {
     this.#board = board;
   }
 
-  constructor(){
+  constructor() {
     this.board = new Gameboard();
   }
 }
+
+export { Player };
