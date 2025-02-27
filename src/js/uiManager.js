@@ -1,8 +1,23 @@
 function getUiComponents() {
   return {
-    playerOneboard: document.querySelector("#player1-board"),
+    playerOneBoard: document.querySelector("#player1-board"),
     playerOneRandomBtn: document.querySelector("#player1-randomize-btn"),
-    playerTwoboard: document.querySelector("#player2-board"),
+    playerTwoBoard: document.querySelector("#player2-board"),
     playerTwoRandomBtn: document.querySelector("#player2-randomize-btn"),
   };
 }
+
+function drawBoard(player, playerBoard) {
+  let boardElement;
+  if (player == 1) boardElement = getUiComponents().playerOneBoard;
+  else boardElement = getUiComponents().playerTwoBoard;
+
+  let gridCellElement;
+  for (let i = 0; i < playerBoard.length; i++) {
+    gridCellElement = document.createElement("div");
+    gridCellElement.classList.add("board-cell");
+    boardElement.appendChild(gridCellElement);
+  }
+}
+
+export { drawBoard };
