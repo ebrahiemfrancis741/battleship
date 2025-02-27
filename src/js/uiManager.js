@@ -13,7 +13,11 @@ function drawBoard(player, playerBoard) {
   else if (player == 2) boardElement = getUiComponents().playerTwoBoard;
 
   let gridCellElement;
-  for (let i = 0; i < playerBoard.board.length; i++) {
+  for (
+    let i = 0;
+    i < playerBoard.board.length * playerBoard.board.length;
+    i++
+  ) {
     gridCellElement = document.createElement("div");
     gridCellElement.classList.add("board-cell");
     boardElement.appendChild(gridCellElement);
