@@ -7,6 +7,11 @@ function getUiComponents() {
   };
 }
 
+function setUpEventHandlers() {
+  getUiComponents().playerOneRandomBtn.addEventListener("click", () => {});
+  getUiComponents().playerTwoRandomBtn.addEventListener("click", () => {});
+}
+
 /*
   helper function, making it easier to get the specified players board
 */
@@ -28,4 +33,4 @@ function drawBoard(player, playerBoard) {
   }
 }
 
-export { drawBoard };
+export { drawBoard, setUpEventHandlers };

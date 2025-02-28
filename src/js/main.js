@@ -1,5 +1,5 @@
 import { Player } from "./player.js";
-import { drawBoard } from "./uiManager.js";
+import { drawBoard, setUpEventHandlers } from "./uiManager.js";
 
 let player1;
 let player2;
@@ -13,3 +13,4 @@ function setUpPlayers() {
 }
 
 setUpPlayers();
+setUpEventHandlers();

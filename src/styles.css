@@ -52,6 +52,10 @@ div.board-container {
     button{
       padding: 4px;
       border: 1px solid black;
+
+      &:hover{
+        background-color: lightgrey;
+      }
     }
   }
 }
