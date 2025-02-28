@@ -1,4 +1,3 @@
-
 function getUiComponents() {
   return {
     playerOneBoard: document.querySelector("#player1-board"),
@@ -29,6 +28,7 @@ function drawBoard(player, playerBoard) {
     for (let j = 0; j < playerBoard.board.length; j++) {
       gridCellElement = document.createElement("div");
       gridCellElement.classList.add("board-cell");
+      gridCellElement.setAttribute("coordinates", `${i},${j}`);
       boardElement.appendChild(gridCellElement);
     }
   }
