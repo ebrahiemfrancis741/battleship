@@ -28,7 +28,8 @@ function drawBoard(player, playerBoard) {
     for (let j = 0; j < playerBoard.board.length; j++) {
       gridCellElement = document.createElement("div");
       gridCellElement.classList.add("board-cell");
-      gridCellElement.setAttribute("coordinates", `${i},${j}`);
+      // value is in the form: player,y,x
+      gridCellElement.setAttribute("coordinates", `${player},${i},${j}`);
       boardElement.appendChild(gridCellElement);
     }
   }
