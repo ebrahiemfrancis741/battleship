@@ -39,6 +39,10 @@ div.board-container {
       width: 30px;
       height: 30px;
 
+      &.ship{
+        background-color: lightskyblue;
+      }
+
       &:hover {
         background-color: rgb(255, 54, 54);
       }

@@ -35,4 +35,23 @@ function drawBoard(player, playerBoard) {
   }
 }
 
+function getBoardCell(player, y, x) {
+  let cell = document.querySelector(`[coordinates="${player},${y},${x}"]`);
+  return cell;
+}
+
+function drawShip(player, coordinateList) {
+  // let playerBoard = getPlayerBoard(player);
+  let boardCell;
+  for (let i = 0; i < coordinateList.length; i++) {
+    boardCell = getBoardCell(
+      player,
+      coordinateList[i][0],
+      coordinateList[i][1]
+    );
+
+    boardCell.classList.add("ship");
+  }
+}
+
 export { drawBoard, setUpEventHandlers };
