@@ -53,5 +53,17 @@ function drawShip(player, coordinateList) {
     boardCell.classList.add("ship");
   }
 }
+/**
+ *
+ * @param {*} player
+ * @param {*} gameBoard
+ * Draw all ships stored in the sGameBoard object for the
+ * specified player
+ */
+function drawAllShips(player, gameBoard) {
+  for (let i = 0; i < gameBoard.ships.length; i++) {
+    drawShip(player, gameBoard.ships[i][2]);
+  }
+}
 
-export { drawBoard, setUpEventHandlers };
+export { drawBoard, setUpEventHandlers, drawAllShips };
