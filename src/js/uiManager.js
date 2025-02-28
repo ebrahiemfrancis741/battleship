@@ -1,3 +1,4 @@
+
 function getUiComponents() {
   return {
     playerOneBoard: document.querySelector("#player1-board"),

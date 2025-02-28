@@ -152,7 +152,11 @@ class Gameboard {
    */
   placeShip(length, coordinateList) {
     let ship = new Ship(length);
-    this.ships.push([ship, Gameboard.getDirection(coordinateList)]);
+    this.ships.push([
+      ship,
+      Gameboard.getDirection(coordinateList),
+      coordinateList,
+    ]);
     for (let i = 0; i < coordinateList.length; i++) {
       this.board[coordinateList[i][0]][coordinateList[i][1]] = ship;
     }
