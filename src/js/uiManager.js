@@ -7,20 +7,24 @@ function getUiComponents() {
   };
 }
 
+/*
+  helper function, making it easier to get the specified players board
+*/
+function getPlayerBoard(player) {
+  if (player == 1) return getUiComponents().playerOneBoard;
+  else if (player == 2) return getUiComponents().playerTwoBoard;
+}
+
 function drawBoard(player, playerBoard) {
-  let boardElement;
-  if (player == 1) boardElement = getUiComponents().playerOneBoard;
-  else if (player == 2) boardElement = getUiComponents().playerTwoBoard;
+  let boardElement = getPlayerBoard(player);
 
   let gridCellElement;
-  for (
-    let i = 0;
-    i < playerBoard.board.length * playerBoard.board.length;
-    i++
-  ) {
-    gridCellElement = document.createElement("div");
-    gridCellElement.classList.add("board-cell");
-    boardElement.appendChild(gridCellElement);
+  for (let i = 0; i < playerBoard.board.length; i++) {
+    for (let j = 0; j < playerBoard.board.length; j++) {
+      gridCellElement = document.createElement("div");
+      gridCellElement.classList.add("board-cell");
+      boardElement.appendChild(gridCellElement);
+    }
   }
 }
 
