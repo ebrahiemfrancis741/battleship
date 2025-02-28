@@ -159,6 +159,22 @@ class Gameboard {
     return ship;
   }
 
+  /*
+    figures out the direction of the ship based on its coordinate list.
+    if the ship length is 1, direction does not matter and therefore we 
+    just set it to 0(horizontal) by default. 1(vertical)
+  */
+  static getDirection(coordinateList) {
+    if (coordinateList == null) return null;
+    else if (coordinateList.length == 1) return 0;
+    else {
+      // if the y-values are the same in the next set of coordinates
+      // then it is horizontal
+      if (coordinateList[0][0] == coordinateList[1][0]) return 0;
+      else return 1;
+    }
+  }
+
   receiveAttack(y, x) {
     let ship = this.board[y][x];
     //check if those coordinates were already hit

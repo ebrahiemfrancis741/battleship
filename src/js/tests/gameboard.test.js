@@ -299,11 +299,11 @@ test("allShipsSunk() returns true when all 1-length ships are sunk", () => {
   let ship1 = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 0));
   let ship2 = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 1));
   let ship3 = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 2));
-  gameBoard.receiveAttack(0,0);
+  gameBoard.receiveAttack(0, 0);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,1);
+  gameBoard.receiveAttack(0, 1);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,2);
+  gameBoard.receiveAttack(0, 2);
   expect(gameBoard.allShipsSunk()).toEqual(true);
 });
 
@@ -312,16 +312,48 @@ test("allShipsSunk() returns true when all 1-length ships are sunk", () => {
   let ship1 = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 0));
   let ship2 = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 2));
   let ship3 = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 4));
-  gameBoard.receiveAttack(0,0);
+  gameBoard.receiveAttack(0, 0);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,1);
+  gameBoard.receiveAttack(0, 1);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,2);
+  gameBoard.receiveAttack(0, 2);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,3);
+  gameBoard.receiveAttack(0, 3);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,4);
+  gameBoard.receiveAttack(0, 4);
   expect(gameBoard.allShipsSunk()).toEqual(false);
-  gameBoard.receiveAttack(0,5);
+  gameBoard.receiveAttack(0, 5);
   expect(gameBoard.allShipsSunk()).toEqual(true);
+});
+//----------------------------------------------------------------------------
+//getDirection
+
+test("getDirection returns correct result", () => {
+  expect(Gameboard.getDirection([[0, 0]])).toEqual(0);
+  expect(
+    Gameboard.getDirection([
+      [0, 0],
+      [0, 1],
+    ])
+  ).toEqual(0);
+  expect(
+    Gameboard.getDirection([
+      [0, 0],
+      [0, 1],
+      [0, 2],
+    ])
+  ).toEqual(0);
+  expect(
+    Gameboard.getDirection([
+      [0, 0],
+      [1, 0],
+    ])
+  ).toEqual(1);
+  expect(
+    Gameboard.getDirection([
+      [0, 0],
+      [1, 0],
+      [2, 0],
+    ])
+  ).toEqual(1);
 });
