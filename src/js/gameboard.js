@@ -48,6 +48,7 @@ class Gameboard {
 
   placeAllShips() {
     let coordinateList;
+
     // add 4-length ships
     coordinateList = this.getAvailableCoordinates(4);
     this.placeShip(4, coordinateList);
@@ -79,11 +80,16 @@ class Gameboard {
     let direction;
     let x, y;
     let coordinateList;
+    let validSpace = false;
     do {
       direction = Math.floor(Math.random() * 2);
       [x, y] = this.#getRandomCoordinates();
       coordinateList = this.isValidPosition(length, direction, y, x);
-    } while (!coordinateList);
+      if (coordinateList != null) {
+        validSpace = this.isValidSpace(coordinateList);
+      }
+    } while (!validSpace || coordinateList == null);
+
     return coordinateList;
   }
 
@@ -139,6 +145,134 @@ class Gameboard {
         else return null;
       }
       return coordinateList;
+    }
+  }
+
+  /**
+   * has atleast 1 space all around the ship, which means if a ship will be
+   * placed here it doesnt touch any other ship (not directly adjacent)
+   */
+  isValidSpace(coordinateList) {
+    let direction = Gameboard.getDirection(coordinateList);
+
+    if (direction == 0) {
+      // check if there is top and bottom space first
+      for (let i = 0; i < coordinateList.length; i++) {
+        let y = coordinateList[i][0];
+        let x = coordinateList[i][1];
+
+        // check top
+        if (y > 0 && this.board[y - 1][x] != null) {
+          return false;
+        }
+        // check bottom
+        if (y < 9 && this.board[y + 1][x] != null) {
+          return false;
+        }
+      }
+
+      // now we need to check the left side of the first coordinate,
+      // the top and bottom of that left coordinate, the right side
+      // of the last coordinate, the top and bottom of that
+      // right coordinate
+      let firstY = coordinateList[0][0];
+      let firstX = coordinateList[0][1];
+
+      if (firstX > 0) {
+        // left coordinate
+        if (this.board[firstY][firstX - 1] != null) {
+          return false;
+        }
+
+        // top of left coordinate
+        if (firstY > 0 && this.board[firstY - 1][firstX - 1] != null) {
+          return false;
+        }
+        // bottom of left coordinate
+        if (firstY < 9 && this.board[firstY + 1][firstX - 1] != null) {
+          return false;
+        }
+      }
+
+      // right coordinate of last coordinate
+      let lastY = coordinateList[coordinateList.length - 1][0];
+      let lastX = coordinateList[coordinateList.length - 1][1];
+
+      if (lastX < 9) {
+        // right coordinate
+        if (this.board[lastY][lastX + 1] != null) {
+          return false;
+        }
+
+        // top of right coordinate
+        if (lastY > 0 && this.board[lastY - 1][lastX + 1] != null) {
+          return false;
+        }
+        // bottom of right coordinate
+        if (lastY < 9 && this.board[lastY + 1][lastX + 1] != null) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      // Handle vertical direction
+      for (let i = 0; i < coordinateList.length; i++) {
+        let y = coordinateList[i][0];
+        let x = coordinateList[i][1];
+
+        // check left
+        if (x > 0 && this.board[y][x - 1] != null) {
+          return false;
+        }
+        // check right
+        if (x < 9 && this.board[y][x + 1] != null) {
+          return false;
+        }
+      }
+
+      // now we need to check the top side of the first coordinate,
+      // the left and right of that top coordinate, the bottom side
+      // of the last coordinate, the left and right of that
+      // bottom coordinate
+      let firstY = coordinateList[0][0];
+      let firstX = coordinateList[0][1];
+
+      if (firstY > 0) {
+        // top coordinate
+        if (this.board[firstY - 1][firstX] != null) {
+          return false;
+        }
+
+        // left of top coordinate
+        if (firstX > 0 && this.board[firstY - 1][firstX - 1] != null) {
+          return false;
+        }
+        // right of top coordinate
+        if (firstX < 9 && this.board[firstY - 1][firstX + 1] != null) {
+          return false;
+        }
+      }
+
+      // bottom coordinate of last coordinate
+      let lastY = coordinateList[coordinateList.length - 1][0];
+      let lastX = coordinateList[coordinateList.length - 1][1];
+
+      if (lastY < 9) {
+        // bottom coordinate
+        if (this.board[lastY + 1][lastX] != null) {
+          return false;
+        }
+
+        // left of bottom coordinate
+        if (lastX > 0 && this.board[lastY + 1][lastX - 1] != null) {
+          return false;
+        }
+        // right of bottom coordinate
+        if (lastX < 9 && this.board[lastY + 1][lastX + 1] != null) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 

@@ -357,3 +357,64 @@ test("getDirection returns correct result", () => {
     ])
   ).toEqual(1);
 });
+// --------------------------------------------------------------------------------------------
+//isValidSpace
+
+test("isValidSpace returns correct result when there is no ships close to the coordinates", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 0));
+  expect(gameBoard.isValidSpace([[0, 0]])).toEqual(true);
+  // expect(gameBoard.board).toEqual([
+  //   [ship, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null, null, null, null],
+  // ]);
+});
+
+test("isValidSpace returns correct result when there is a 1-length ship next to coordinates", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(1, gameBoard.isValidPosition(1, 0, 0, 1));
+  expect(gameBoard.isValidSpace([[0, 1]])).toEqual(true);
+  expect(gameBoard.board).toEqual([
+    [null, ship, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+
+test("isValidSpace returns correct result when there is a 2-length ship next to coordinates", () => {
+  let gameBoard = new Gameboard();
+  let ship = gameBoard.placeShip(2, gameBoard.isValidPosition(2, 0, 0, 0));
+  expect(gameBoard.board).toEqual([
+    [ship, ship, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+  expect(
+    gameBoard.isValidSpace([
+      [0, 0],
+      [0, 1],
+    ])
+  ).toEqual(true);
+});
