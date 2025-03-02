@@ -18,4 +18,4 @@ function setUpPlayers() {
 }
 
 setUpPlayers();
-setUpEventHandlers();
+setUpEventHandlers(player1, player2);

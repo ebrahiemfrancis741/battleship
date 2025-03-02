@@ -1,3 +1,5 @@
+import { Player } from "./player.js";
+
 function getUiComponents() {
   return {
     playerOneBoard: document.querySelector("#player1-board"),
@@ -7,9 +9,20 @@ function getUiComponents() {
   };
 }
 
-function setUpEventHandlers() {
-  getUiComponents().playerOneRandomBtn.addEventListener("click", () => {});
-  getUiComponents().playerTwoRandomBtn.addEventListener("click", () => {});
+function setUpEventHandlers(player1, player2) {
+  getUiComponents().playerOneRandomBtn.addEventListener("click", () => {
+    randomBtnEventHandler(1, player1);
+  });
+  getUiComponents().playerTwoRandomBtn.addEventListener("click", () => {
+    randomBtnEventHandler(2, player2);
+  });
+}
+
+function randomBtnEventHandler(playerNumber, player) {
+  player = new Player();
+  drawBoard(playerNumber, player.board);
+  player.board.placeAllShips();
+  drawAllShips(playerNumber, player.board);
 }
 
 /*
@@ -22,6 +35,7 @@ function getPlayerBoard(player) {
 
 function drawBoard(player, playerBoard) {
   let boardElement = getPlayerBoard(player);
+  boardElement.replaceChildren();
 
   let gridCellElement;
   for (let i = 0; i < playerBoard.board.length; i++) {
