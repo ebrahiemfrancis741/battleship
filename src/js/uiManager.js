@@ -16,6 +16,33 @@ function setUpEventHandlers(player1, player2) {
   getUiComponents().playerTwoRandomBtn.addEventListener("click", () => {
     randomBtnEventHandler(2, player2);
   });
+
+  getUiComponents().playerTwoBoard.addEventListener("click", (e) => {
+    receiveAttackEventHandler(player2, e.target);
+  });
+}
+
+function receiveAttackEventHandler(player, gridCell) {
+  let coordinates = gridCell.getAttribute("coordinates");
+  coordinates = coordinates.split(",");
+  let y = parseInt(coordinates[1]);
+  let x = parseInt(coordinates[2]);
+
+  console.log(player.board.board[y][x]);
+  let ship = player.board.board[y][x];
+
+  if (ship == null) {
+    gridCell.classList.add("missed-hit");
+  } else {
+    // ship.hit();
+    player.board.receiveAttack(y, x);
+    gridCell.classList.add("ship-hit");
+    if (ship.isSunk()) {
+      console.log(`${ship.length}-length ship sunk`)
+      gridCell.classList.toggle("ship-hit");
+      gridCell.classList.add("ship-sunk");
+    }
+  }
 }
 
 function randomBtnEventHandler(playerNumber, player) {

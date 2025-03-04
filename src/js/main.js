@@ -14,7 +14,7 @@ function setUpPlayers() {
   player1.board.placeAllShips();
   drawAllShips(1, player1.board);
   player2.board.placeAllShips();
-  drawAllShips(2, player2.board);
+  // drawAllShips(2, player2.board);
 }
 
 setUpPlayers();
