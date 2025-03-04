@@ -325,6 +325,16 @@ class Gameboard {
     if (ship) ship.hit();
   }
 
+  // check if these coordinates were already hit
+  alreadyHit(y, x) {
+    for (let i = 0; i < this.coordinatesHit.length; i++) {
+      if (this.coordinatesHit[i][0] == y && this.coordinatesHit[i][1] == x) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   allShipsSunk() {
     for (let i = 0; i < this.ships.length; i++) {
       if (!this.ships[i][0].isSunk()) return false;

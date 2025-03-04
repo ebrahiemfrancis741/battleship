@@ -28,19 +28,19 @@ function receiveAttackEventHandler(player, gridCell) {
   let y = parseInt(coordinates[1]);
   let x = parseInt(coordinates[2]);
 
-  console.log(player.board.board[y][x]);
   let ship = player.board.board[y][x];
 
-  if (ship == null) {
-    gridCell.classList.add("missed-hit");
-  } else {
-    // ship.hit();
-    player.board.receiveAttack(y, x);
-    gridCell.classList.add("ship-hit");
-    if (ship.isSunk()) {
-      console.log(`${ship.length}-length ship sunk`)
-      gridCell.classList.toggle("ship-hit");
-      gridCell.classList.add("ship-sunk");
+  if (!player.board.alreadyHit(y, x)) {
+    if (ship == null) {
+      gridCell.classList.add("missed-hit");
+    } else {
+      player.board.receiveAttack(y, x);
+      gridCell.classList.add("ship-hit");
+      if (ship.isSunk()) {
+        console.log(`${ship.length}-length ship sunk`);
+        gridCell.classList.toggle("ship-hit");
+        gridCell.classList.add("ship-sunk");
+      }
     }
   }
 }
