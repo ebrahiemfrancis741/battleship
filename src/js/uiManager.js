@@ -18,28 +18,75 @@ function setUpEventHandlers(player1, player2) {
   });
 
   getUiComponents().playerTwoBoard.addEventListener("click", (e) => {
-    receiveAttackEventHandler(player2, e.target);
+    receiveAttackEventHandler(2, player2, e.target);
   });
 }
 
-function receiveAttackEventHandler(player, gridCell) {
+function receiveAttackEventHandler(playerNum, playerRef, gridCell) {
   let coordinates = gridCell.getAttribute("coordinates");
   coordinates = coordinates.split(",");
   let y = parseInt(coordinates[1]);
   let x = parseInt(coordinates[2]);
 
-  let ship = player.board.board[y][x];
+  let ship = playerRef.board.board[y][x];
 
-  if (!player.board.alreadyHit(y, x)) {
+  if (!playerRef.board.alreadyHit(y, x)) {
     if (ship == null) {
       gridCell.classList.add("missed-hit");
     } else {
-      player.board.receiveAttack(y, x);
+      playerRef.board.receiveAttack(y, x);
       gridCell.classList.add("ship-hit");
       if (ship.isSunk()) {
         console.log(`${ship.length}-length ship sunk`);
         gridCell.classList.toggle("ship-hit");
-        gridCell.classList.add("ship-sunk");
+        drawSunkShip(playerNum, playerRef, ship);
+      }
+    }
+  }
+}
+
+// draws sunk ships in a specific way so it is easier to see
+function drawSunkShip(playerNum, playerRef, ship) {
+  let coordinateList;
+  let direction;
+  let playerBoard = getPlayerBoard(playerNum);
+  let gridCell;
+
+  // look for the ship, because its coordinate list is associated
+  // with it in the ships array which we need
+  for (let i = 0; i < playerRef.board.ships.length; i++) {
+    if (playerRef.board.ships[i][0] == ship) {
+      direction = playerRef.board.ships[i][1];
+      coordinateList = playerRef.board.ships[i][2];
+    }
+  }
+
+  if (coordinateList.length == 1) {
+    gridCell = document.querySelector(
+      `[coordinates="${playerNum},${coordinateList[0][0]},${coordinateList[0][1]}"]`
+    );
+    gridCell.classList.add("one-length-ship-sunk");
+  } else {
+    for (let i = 0; i < coordinateList.length; i++) {
+      gridCell = document.querySelector(
+        `[coordinates="${playerNum},${coordinateList[i][0]},${coordinateList[i][1]}"]`
+      );
+      if (direction == 0) {
+        if (i == 0) {
+          gridCell.classList.add("h-start-ship-sunk");
+        } else if (i == coordinateList.length - 1) {
+          gridCell.classList.add("h-end-ship-sunk");
+        } else {
+          gridCell.classList.add("h-mid-ship-sunk");
+        }
+      } else {
+        if (i == 0) {
+          gridCell.classList.add("v-start-ship-sunk");
+        } else if (i == coordinateList.length - 1) {
+          gridCell.classList.add("v-end-ship-sunk");
+        } else {
+          gridCell.classList.add("v-mid-ship-sunk");
+        }
       }
     }
   }

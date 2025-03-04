@@ -51,8 +51,48 @@ div.board-container {
         background-color: greenyellow;
       }
 
-      &.ship-sunk {
+      &.one-length-ship-sunk {
         border: 2px solid green;
+        background-color: greenyellow;
+      }
+
+      &.h-start-ship-sunk {
+        border-left: 2px solid green;
+        border-top: 2px solid green;
+        border-bottom: 2px solid green;
+        background-color: greenyellow;
+      }
+
+      &.h-end-ship-sunk {
+        border-right: 2px solid green;
+        border-top: 2px solid green;
+        border-bottom: 2px solid green;
+        background-color: greenyellow;
+      }
+
+      &.h-mid-ship-sunk {
+        border-top: 2px solid green;
+        border-bottom: 2px solid green;
+        background-color: greenyellow;
+      }
+
+      &.v-start-ship-sunk {
+        border-left: 2px solid green;
+        border-top: 2px solid green;
+        border-right: 2px solid green;
+        background-color: greenyellow;
+      }
+
+      &.v-end-ship-sunk {
+        border-right: 2px solid green;
+        border-left: 2px solid green;
+        border-bottom: 2px solid green;
+        background-color: greenyellow;
+      }
+
+      &.v-mid-ship-sunk {
+        border-right: 2px solid green;
+        border-left: 2px solid green;
         background-color: greenyellow;
       }
 
