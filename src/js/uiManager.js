@@ -5,16 +5,12 @@ function getUiComponents() {
     playerOneBoard: document.querySelector("#player1-board"),
     playerOneRandomBtn: document.querySelector("#player1-randomize-btn"),
     playerTwoBoard: document.querySelector("#player2-board"),
-    playerTwoRandomBtn: document.querySelector("#player2-randomize-btn"),
   };
 }
 
 function setUpEventHandlers(player1, player2) {
   getUiComponents().playerOneRandomBtn.addEventListener("click", () => {
     randomBtnEventHandler(1, player1);
-  });
-  getUiComponents().playerTwoRandomBtn.addEventListener("click", () => {
-    randomBtnEventHandler(2, player2);
   });
 
   getUiComponents().playerTwoBoard.addEventListener("click", (e) => {
@@ -38,7 +34,6 @@ function receiveAttackEventHandler(playerNum, playerRef, gridCell) {
       gridCell.classList.add("ship-hit");
       if (ship.isSunk()) {
         console.log(`${ship.length}-length ship sunk`);
-        gridCell.classList.toggle("ship-hit");
         drawSunkShip(playerNum, playerRef, ship);
       }
     }

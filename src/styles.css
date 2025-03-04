@@ -23,9 +23,10 @@ main {
 div.board-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   width: 380px;
+  height: 400px;
   border: 1px solid black;
   padding-top: 30px;
 
@@ -49,6 +50,10 @@ div.board-container {
 
       &.ship-hit {
         background-color: greenyellow;
+
+        &:hover {
+          background-color: greenyellow;
+        }
       }
 
       &.one-length-ship-sunk {
