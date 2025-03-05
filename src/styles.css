@@ -17,10 +17,26 @@ header {
 main {
   display: flex;
   justify-content: center;
-  gap: 100px;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
 }
 
 div.board-container {
+  display: flex;
+  gap: 100px;
+}
+
+button {
+  padding: 4px;
+  border: 1px solid black;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+}
+
+div.board {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -108,15 +124,6 @@ div.board-container {
   }
 
   div.board-functions {
-    margin: 10px;
-
-    button {
-      padding: 4px;
-      border: 1px solid black;
-
-      &:hover {
-        background-color: lightgrey;
-      }
-    }
+    margin: 20px;
   }
 }
